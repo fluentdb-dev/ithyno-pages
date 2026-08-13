@@ -1,0 +1,7 @@
+.DS_Store
+*.log
+.venv/
+__pycache__/
+.cache/
+# Built MkDocs output; GitHub Pages receives it as a workflow artifact.
+site/

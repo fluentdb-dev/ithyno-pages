@@ -1,0 +1,102 @@
+# MkDocs Material config for the ithyno docs site.
+#
+# Deploys via .github/workflows/pages.yml on pushes to the independent
+# pages branch. Local preview:
+#   pip install -r requirements.txt
+#   mkdocs serve
+# Then browse http://localhost:8000/.
+#
+# `mkdocs build --strict` fails on broken nav references / broken
+# internal links — the CI workflow uses --strict so doc-rot is caught
+# at CI time.
+site_name: ithyno
+site_description: >-
+  Local dashboard for OpenSpec — dispatches propose / apply / review /
+  verify skills to AI CLI agents. Markdown underneath, a progress
+  dashboard on top.
+site_url: https://fluentdb-dev.github.io/ithyno/
+repo_url: https://github.com/fluentdb-dev/ithyno
+repo_name: fluentdb-dev/ithyno
+edit_uri: edit/pages/docs/
+
+# docs_dir: docs (implied default)
+
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - toc.integrate
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.action.edit
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.snippets:
+      base_path: [., docs]
+
+plugins:
+  - search
+  - i18n:
+      docs_structure: folder
+      languages:
+        - locale: en
+          name: English
+          default: true
+          build: true
+        - locale: ja
+          name: 日本語
+          link: /ja/
+          build: true
+
+# Nav: public documentation mapped to sidebar sections. Internal planning
+# notes stay in the application branches and are not shipped from pages.
+nav:
+  - Home: index.md
+  - Getting Started:
+      - Project creation flow: project-creation-flow.md
+      - Multi-agent execution flow: multi-agent-execution-flow.md
+      - Init & Import: user-manual-init-and-import.md
+      - User manual: user-manual/README.md
+      - Multi-agent CLI: user-manual/multi-agent-cli.md
+      - Troubleshooting: user-manual/troubleshooting.md
+  - Architecture:
+      - Overview: architecture.md
+      - OpenSpec and agents: architecture/openspec-agent.md
+      - OpenSpec Kanban: architecture/openspec-kanban.md
+      - OpenSpec worktrees: architecture/openspec-worktree.md
+      - Git identity: architecture/git-identity.md
+      - Parallel shells: architecture/parallel-shells.md
+      - ADRs:
+          - PENDING annotation position: adr/2026-07-28-pending-annotation-position.md
+  - Development:
+      - Roadmap: roadmap.md
+      - Release process: release.md
+      - Skill capabilities: skill-capabilities.md
+      - Skill e2e manual verification: skill-e2e-manual-verification.md
+      - Migration guide: migration-guide.md
