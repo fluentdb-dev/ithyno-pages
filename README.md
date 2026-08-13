@@ -1,8 +1,9 @@
 # ithyno documentation site
 
-This orphan `pages` branch contains only the source and deployment workflow
-for the ithyno documentation site. Application code and OpenSpec change
-artifacts live on the repository's development branches.
+This repository contains only the source and deployment workflow for the
+ithyno documentation site. Application code and OpenSpec change artifacts
+live in the separate [`fluentdb-dev/ithyno`](https://github.com/fluentdb-dev/ithyno)
+repository.
 
 ## Local preview
 
@@ -17,9 +18,9 @@ Open <http://localhost:8000/>.
 
 ## Publishing
 
-Push changes to `pages`. The `Docs (GitHub Pages)` workflow runs
+Push changes to `main`. The `Docs (GitHub Pages)` workflow runs
 `mkdocs build --strict` and deploys the generated site. GitHub Pages must use
 **GitHub Actions** as its source in the repository settings.
 
-The application repository is
-[`fluentdb-dev/ithyno`](https://github.com/fluentdb-dev/ithyno).
+The intended remote repository is `fluentdb-dev/ithyno-pages`. Until that
+repository is created, this local repository intentionally has no `origin`.

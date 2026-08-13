@@ -1,7 +1,7 @@
 # MkDocs Material config for the ithyno docs site.
 #
-# Deploys via .github/workflows/pages.yml on pushes to the independent
-# pages branch. Local preview:
+# Deploys via .github/workflows/pages.yml on pushes to this repository's
+# main branch. Local preview:
 #   pip install -r requirements.txt
 #   mkdocs serve
 # Then browse http://localhost:8000/.
@@ -14,10 +14,10 @@ site_description: >-
   Local dashboard for OpenSpec — dispatches propose / apply / review /
   verify skills to AI CLI agents. Markdown underneath, a progress
   dashboard on top.
-site_url: https://fluentdb-dev.github.io/ithyno/
-repo_url: https://github.com/fluentdb-dev/ithyno
-repo_name: fluentdb-dev/ithyno
-edit_uri: edit/pages/docs/
+site_url: https://fluentdb-dev.github.io/ithyno-pages/
+repo_url: https://github.com/fluentdb-dev/ithyno-pages
+repo_name: fluentdb-dev/ithyno-pages
+edit_uri: edit/main/docs/
 
 # docs_dir: docs (implied default)
 

@@ -3,7 +3,7 @@ name: Docs (GitHub Pages)
 on:
   push:
     branches:
-      - pages
+      - main
   workflow_dispatch:
 
 # Pages allows a single deployment at a time; queue rather than
