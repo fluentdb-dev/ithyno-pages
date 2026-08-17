@@ -35,7 +35,7 @@
 
 - :material-rocket-launch: **Ithyno が初めての方**
 
-    [プロジェクト作成の流れ](project-creation-flow.md) や、[インストールとインポート](user-manual-init-and-import.md) ガイドを読んで、プロジェクトの雛形を作成しましょう。
+    [シンプルなプロジェクトを始める](project-creation-flow.md)を進め、詳しい初期化手順が必要な場合は[インストールとインポート](user-manual-init-and-import.md)ガイドを参照してください。
 
 - :material-book-open: **日常的に利用する方**
 

@@ -46,6 +46,12 @@ theme:
         icon: material/weather-sunny
         name: Switch to light mode
 
+extra_css:
+  - assets/stylesheets/installation.css
+
+extra_javascript:
+  - assets/javascripts/installation-selector.js
+
 markdown_extensions:
   - admonition
   - attr_list
@@ -54,7 +60,11 @@ markdown_extensions:
   - toc:
       permalink: true
   - pymdownx.details
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.tabbed:
       alternate_style: true
   - pymdownx.snippets:
@@ -73,18 +83,50 @@ plugins:
           name: 日本語
           link: /ja/
           build: true
+          nav_translations:
+            Home: ホーム
+            Getting Started: はじめに
+            Installation: インストール
+            Start Simple Project: シンプルなプロジェクトを始める
+            Set up multiple agents: 複数エージェントを設定する
+            Multi-agent execution flow: マルチエージェント実行フロー
+            Init & Import: 初期化とインポート
+            User manual: ユーザーマニュアル
+            Multi-agent CLI: マルチエージェントCLI
+            Troubleshooting: トラブルシューティング
+            Advanced: 高度な設定
+            tmux and agmsg: tmuxとagmsg
+            Architecture: アーキテクチャ
+            Overview: 概要
+            OpenSpec and agents: OpenSpecとエージェント
+            OpenSpec Kanban: OpenSpec Kanban
+            OpenSpec worktrees: OpenSpec worktree
+            Git identity: Git identity
+            Parallel shells: 並列Shell
+            ADRs: ADR
+            PENDING annotation position: PENDING注釈の位置
+            Development: 開発
+            Roadmap: ロードマップ
+            Release process: リリース手順
+            Skill capabilities: Skill機能
+            Skill e2e manual verification: Skill E2E手動検証
+            Migration guide: 移行ガイド
 
 # Nav: public documentation mapped to sidebar sections. Internal planning
 # notes stay in the application branches and are not shipped from pages.
 nav:
   - Home: index.md
   - Getting Started:
-      - Project creation flow: project-creation-flow.md
+      - Installation: installation.md
+      - Start Simple Project: project-creation-flow.md
+      - Set up multiple agents: multi-agent-setup-and-dispatch.md
       - Multi-agent execution flow: multi-agent-execution-flow.md
       - Init & Import: user-manual-init-and-import.md
       - User manual: user-manual/README.md
       - Multi-agent CLI: user-manual/multi-agent-cli.md
       - Troubleshooting: user-manual/troubleshooting.md
+  - Advanced:
+      - tmux and agmsg: advanced/tmux-and-agmsg.md
   - Architecture:
       - Overview: architecture.md
       - OpenSpec and agents: architecture/openspec-agent.md

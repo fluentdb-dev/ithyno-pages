@@ -35,7 +35,7 @@
 
 - :material-rocket-launch: **New to ithyno?**
 
-    Review the [Project Creation Flow](project-creation-flow.md) and [Init & Import](user-manual-init-and-import.md) guide to scaffold a project.
+    Follow [Start Simple Project](project-creation-flow.md), then use the [Init & Import](user-manual-init-and-import.md) guide when you need the detailed setup flow.
 
 - :material-book-open: **Using it every day?**
 
