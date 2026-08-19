@@ -51,6 +51,7 @@ extra_css:
   - assets/stylesheets/installation.css
   - assets/stylesheets/navigation.css
   - assets/stylesheets/content-images.css
+  - assets/stylesheets/landing.css
 
 extra_javascript:
   - assets/javascripts/installation-selector.js
