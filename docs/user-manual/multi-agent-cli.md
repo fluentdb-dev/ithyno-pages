@@ -181,4 +181,5 @@ The dispatcher automatically selects the agent according to the active role.
 
 ## Related Pages
 
-- Agent Roles — Distinguishing code / review / verify / manager (Not yet written. Documentation planned.)<!-- TODO: restore link once translated -->
+- [Set up multiple agents and dispatch a change](../multi-agent-setup-and-dispatch.md) — Manager and Worker roles and the standard setup flow.
+- [OpenSpec and agents](../architecture/openspec-agent.md) — Code, Review, and Verify execution and state transitions.

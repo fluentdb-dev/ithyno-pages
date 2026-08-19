@@ -87,9 +87,9 @@ tmuxだけではWorkerロールの設定、複数ChangeのDispatch、エージ�
 1. **Settings → Prerequisites**を開き、tmuxが検出されていることを確認します。
 2. **Settings → Execution**を開きます。
 3. **Wrap Manager terminal in tmux**を有効にします。
-4. Managerターミナルを再起動または開き直し、tmux内で起動させます。
+4. Managerターミナル右上のリフレッシュボタンを選択し、tmux内で再起動させます。
 
-次のトップレベル設定が書き込まれます。
+プロジェクトルートの`agents.yaml`に次の設定が書き込まれます。
 
 ```yaml
 tmux: true
@@ -99,7 +99,8 @@ tmux: true
 セッションの作成・再接続時に、現在のDashboard endpointとsession credentialも
 渡すため、復帰したManagerは現在のプロジェクトコンテキストを使用します。
 
-tmuxを使用しない場合はトグルを無効にし、Managerターミナルを再起動します。
+tmuxを使用しない場合はトグルを無効にし、Managerターミナル右上の
+リフレッシュボタンから再起動します。
 tmuxが有効でも`PATH`から見つからない場合、ithynoは警告を表示し、Managerを
 起動しません。tmuxをインストールするか設定を無効にしてithynoを再起動した後、
 Managerターミナルを開き直します。

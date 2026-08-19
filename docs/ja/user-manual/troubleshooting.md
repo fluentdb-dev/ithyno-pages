@@ -96,3 +96,47 @@ Onboarding パネルが完了する前に閉じた可能性があります。ith
 `onboarding-close` を受けてもサブプロセス (`openspec init` の `npx`) を kill
 しないため、途中終了だとフォルダが不完全な状態で残ります。フォルダを削除
 してやり直してください。
+
+## macOSのElectron AppでAgyが起動しない
+
+macOSでは、Agyの画面を正しく表示するため、Electron AppのManagerターミナルを
+tmuxでラップする必要があります。
+
+1. tmuxが未インストールの場合はインストールします。
+
+   ```shell
+   brew install tmux
+   ```
+
+2. **Settings → Execution**を開きます。
+3. **Wrap Manager terminal in tmux**を有効にします。
+4. Managerターミナルを再起動します。
+
+## 子エージェントに指定したAgyの処理が終わらない
+
+Agy Workerは、Agy ManagerからAgyネイティブの`invoke_subagent`機構で委譲する
+場合にのみ対応しています。現在、Agy以外のManager CLIからAgy Workerを呼び出す
+ことはできません。
+
+まれにAgyからAgyへのdispatchでも、`invoke_subagent`ではなくサーバー側の
+AgentRunnerを経由してWorkerが起動され、処理がハングすることがあります。
+次の点を確認してください。
+
+- ManagerのCommandが`agy`になっている
+- Agy Workerが`invoke_subagent`から起動されている
+- 対象Workerが`POST /api/agents/run`へルーティングされていない
+
+AgentRunnerが選択されていた場合はそのジョブを停止し、`invoke_subagent`を使用して
+再度dispatchしてください。
+
+## macOSにElectron Appをインストールしたが起動しない
+
+macOSにアプリの起動を止められる場合は、最初に公式のithynoリリースから取得した
+ファイルであることを確認し、次のコマンドでダウンロードファイルの隔離属性を
+解除します。
+
+```shell
+xattr -cr /Applications/ithyno.app
+```
+
+コマンド完了後、`ithyno.app`をもう一度起動してください。

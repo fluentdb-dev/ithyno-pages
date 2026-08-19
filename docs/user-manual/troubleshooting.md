@@ -77,3 +77,46 @@ The exact cause will be detailed in the logs. Please paste the log content when 
 ## Created Folder via `ithyno: New Project` Remains Empty
 
 You might have closed the onboarding panel before it finished. ithyno does not kill the background subprocess (`openspec init` via `npx`) even after receiving the `onboarding-close` event, so aborting mid-way leaves the folder in an incomplete state. Delete the folder and try again.
+
+## Agy Does Not Start in the macOS Electron App
+
+On macOS, the Electron app needs to wrap the Manager terminal in tmux for the
+Agy interface to display correctly.
+
+1. Install tmux if it is not already available:
+
+   ```shell
+   brew install tmux
+   ```
+
+2. Open **Settings → Execution**.
+3. Enable **Wrap Manager terminal in tmux**.
+4. Restart the Manager terminal.
+
+## An Agy Worker Never Finishes
+
+An Agy Worker is supported only when it is delegated by an Agy Manager through
+Agy's native `invoke_subagent` mechanism. An Agy Worker cannot currently be
+called from another Manager CLI.
+
+In rare cases, an Agy-to-Agy dispatch may incorrectly start the Worker through
+the server-side AgentRunner instead of `invoke_subagent`, causing it to hang.
+Confirm that:
+
+- the Manager command is `agy`;
+- the Agy Worker is launched through `invoke_subagent`; and
+- the dispatch does not route that Worker through `POST /api/agents/run`.
+
+If AgentRunner was selected, stop that job and dispatch it again through
+`invoke_subagent`.
+
+## The macOS Electron App Does Not Open After Installation
+
+If macOS blocks the installed application, first confirm that it came from the
+official ithyno release, then clear the downloaded-file quarantine attributes:
+
+```shell
+xattr -cr /Applications/ithyno.app
+```
+
+Open `ithyno.app` again after the command completes.

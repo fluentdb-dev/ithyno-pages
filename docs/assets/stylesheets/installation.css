@@ -6,7 +6,21 @@
   padding: 1rem;
   border: 0.05rem solid var(--md-default-fg-color--lightest);
   border-radius: 0.4rem;
+  background: var(--md-default-bg-color);
+}
+
+.install-selector .highlight {
+  position: relative;
+  margin: 1em 0;
+  border: 0.05rem solid var(--md-default-fg-color--lightest);
+  border-radius: 0.25rem;
   background: var(--md-code-bg-color);
+}
+
+.install-selector .highlight > pre {
+  margin: 0;
+  border-radius: inherit;
+  background: transparent;
 }
 
 .install-selector label {

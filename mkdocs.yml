@@ -32,6 +32,7 @@ theme:
     - search.highlight
     - content.code.copy
     - content.action.edit
+    - content.tabs.link
   palette:
     - scheme: default
       primary: indigo
@@ -48,9 +49,12 @@ theme:
 
 extra_css:
   - assets/stylesheets/installation.css
+  - assets/stylesheets/navigation.css
+  - assets/stylesheets/content-images.css
 
 extra_javascript:
   - assets/javascripts/installation-selector.js
+  - assets/javascripts/sidebar-toggle.js
 
 markdown_extensions:
   - admonition
@@ -91,8 +95,7 @@ plugins:
             Set up multiple agents: 複数エージェントを設定する
             Multi-agent execution flow: マルチエージェント実行フロー
             Init & Import: 初期化とインポート
-            User manual: ユーザーマニュアル
-            Multi-agent CLI: マルチエージェントCLI
+            Agent configuration (agents.yaml): エージェント設定（agents.yaml）
             Troubleshooting: トラブルシューティング
             Advanced: 高度な設定
             tmux and agmsg: tmuxとagmsg
@@ -122,8 +125,7 @@ nav:
       - Set up multiple agents: multi-agent-setup-and-dispatch.md
       - Multi-agent execution flow: multi-agent-execution-flow.md
       - Init & Import: user-manual-init-and-import.md
-      - User manual: user-manual/README.md
-      - Multi-agent CLI: user-manual/multi-agent-cli.md
+      - Agent configuration (agents.yaml): user-manual/multi-agent-cli.md
       - Troubleshooting: user-manual/troubleshooting.md
   - Advanced:
       - tmux and agmsg: advanced/tmux-and-agmsg.md

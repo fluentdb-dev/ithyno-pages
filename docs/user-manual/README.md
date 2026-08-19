@@ -9,7 +9,7 @@ This is the manual for end-users. For design and implementation background, plea
 
 ## Contents
 
-- Agent Configuration — Supported CLIs and agents.yaml<!-- TODO: link back to ./multi-agent-cli.md once translated -->
+- [Agent configuration — supported CLIs and `agents.yaml`](./multi-agent-cli.md)
   How to configure `claude`, `codex`, `agy`, `copilot`, `gemini`, `opencode`, or `cursor` as workers in `agents.yaml`.
 - Troubleshooting<!-- TODO: link back to ./troubleshooting.md once translated -->
   Common errors and workarounds (session-id, server launch failures, aborted new projects, etc.).

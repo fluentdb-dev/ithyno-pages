@@ -79,11 +79,28 @@ git --version
 node --version
 ```
 
-### 許可設定
+### SmartScreenが表示された場合にインストーラーを実行する
 
-!!! note "インストールガイドの枠組み"
-    検証済みのWindows Security、SmartScreen、ターミナル、オートメーション権限の手順を
-    ここへ追加します。システム全体のセキュリティ機能を無効化する手順にはしません。
+まだ広く認識されていないインストーラーは、Microsoft Defender SmartScreenにより
+停止されることがあります。SmartScreen自体は無効にしないでください。最初に
+[ithyno公式Releasesページ](https://github.com/fluentdb-dev/ithyno/releases)から
+ダウンロードしたファイルであることを確認し、次の手順で今回だけ実行を許可します。
+
+1. SmartScreen画面の**詳細情報**を選択します。
+
+<figure markdown="span">
+  ![Microsoft Defender SmartScreenの最初の画面に、実行しないボタンと詳細情報リンクが表示される。](assets/images/win-install-1.png){ loading=lazy }
+  <figcaption><strong>詳細情報</strong>を選択し、アプリ情報と追加の操作を表示します。</figcaption>
+</figure>
+
+2. アプリ欄がダウンロードしたithynoインストーラーのファイル名であることを確認し、
+   **実行**を選択します。
+
+<figure markdown="span">
+  ![詳細情報を開くとithynoインストーラーのファイル名と実行ボタンが表示される。](assets/images/win-install-2.png){ loading=lazy }
+  <figcaption>入手元とファイル名を確認できた場合に限り、<strong>実行</strong>を選択します。</figcaption>
+</figure>
+
   </div>
 
   <div data-install-panel data-os="linux" markdown>
@@ -198,8 +215,6 @@ chmod +x ithyno-*-linux-x86_64.AppImage
 2. [最新のVSIXをダウンロード](https://github.com/fluentdb-dev/ithyno/releases){ data-release-asset=".vsix" }します。
 3. VS Codeで **Extensions: Install from VSIX…** を実行し、ファイルを選択します。
 
-!!! note "インストールガイドの枠組み"
-    Marketplace公開と初回起動確認の手順は、利用可能になった時点でここへ追加します。
   </div>
 </div>
 

@@ -43,6 +43,11 @@ ithynoのreviewなど、受け取ったワークフローを解決できなけ�
 CLIに対応した組み込みワークフローを変更したい場合だけ、カスタムPromptを
 設定します。
 
+<figure class="dialog-screenshot" markdown="span">
+  ![Agyと組み込みdispatch Promptを使用するManagerの編集画面。](../assets/images/agent-manager.png){ loading=lazy }
+  <figcaption>Managerの設定例です。Promptを空欄にすると、CLIに対応した組み込みdispatchワークフローを使用します。</figcaption>
+</figure>
+
 ### 例：各Workerステージで異なるCLIを使用する
 
 次の例では、ManagerをClaude、実装をCodex、レビューをCopilot、検証をClaudeへ
@@ -61,12 +66,50 @@ CLIに対応した組み込みワークフローを変更したい場合だけ�
 `codex exec <prompt>`、ClaudeとCopilotは`-p <prompt>`で起動されます。この例では
 `exec`、`-p`、ワークフロー名を自分で記述する必要はありません。
 
-!!! warning "自動承認フラグを確認してください"
-    上記のフラグは、確認なしのファイル編集やコマンド実行を許可します。信頼できる
-    リポジトリとアカウントでのみ使用し、必要に応じて環境に適したapprovalまたは
-    sandbox設定へ置き換えてください。
+エージェント名は表示用のラベルです。実際に起動するCLIは**Command**欄の値で
+決まります。
+
+<figure class="dialog-screenshot" markdown="span">
+  ![codeロールと組み込みOpenSpec apply Promptを選択したWorkerの編集画面。](../assets/images/agent-code.png){ loading=lazy }
+  <figcaption>code Workerの設定例です。codeロールを選択し、Promptを空欄にすると組み込みOpenSpec applyワークフローを使用します。</figcaption>
+</figure>
+
+<figure class="dialog-screenshot" markdown="span">
+  ![reviewロールとカスタムithyno review Promptを設定したWorkerの編集画面。](../assets/images/agent-review.png){ loading=lazy }
+  <figcaption>ロール別のカスタムPromptを設定したreview Workerの例です。</figcaption>
+</figure>
+
+!!! warning "異種CLI Workerの自動承認フラグを確認してください"
+    上記の設定例には、`--dangerously-bypass-approvals-and-sandbox`、`--yolo -s`、
+    `--dangerously-skip-permissions`が含まれています。これらのフラグは、Workerに
+    確認を求めずファイル編集やコマンド実行を許可します。
+
+    これらが関係するのは、Managerが異なるCLIを独立したサブプロセスとして起動し、
+    そのCLIが承認待ちになる場合です。同じCLIの親から子をネイティブなAgent/Tool
+    機構で委譲するだけなら、この目的で自動承認フラグを追加する必要はありません。
+    サブプロセスWorkerでは、信頼できるリポジトリとアカウントでのみunattended実行を
+    許可し、例示したフラグを環境に適したapprovalまたはsandbox設定へ置き換えてください。
 
 1つのWorkerに`review`と`verify`など、複数のロールチップを選択することもできます。
+
+<figure markdown="span">
+  ![Agents画面にAgyのManager、Codexのcode Worker、Copilotのreview Workerが表示されています。](../assets/images/ithyno-agents.png){ loading=lazy }
+  <figcaption>Managerとロール別Workerを設定したAgents画面の例です。</figcaption>
+</figure>
+
+### 確認済みのManagerとWorkerの組み合わせ
+
+次の組み合わせは、ithynoのdispatcherで手動確認済みです。この表は
+[ithynoのREADME](https://github.com/fluentdb-dev/ithyno#agent-dispatch-compatibility)にも
+残しています。
+
+| Manager | Claude Worker | Agy Worker | Copilot Worker | Codex Worker | `dispatch-multi` |
+|---|---:|---:|---:|---:|---:|
+| Claude | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Codex | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Agy | ✅ | ✅ | ✅ | ✅ | ✅ |
+
+✅は確認済み、❌は現在動作しない組み合わせです。
 
 ## 3. 設定を確認する
 
@@ -83,6 +126,11 @@ CLIに対応した組み込みワークフローを変更したい場合だけ�
 `maxParallel`は同時に動作できるChange数を制限します。同じChangeのcode、review、
 verifyを同時に実行する設定ではありません。
 
+<figure markdown="span">
+  ![展開したManager欄に解決済みの起動コマンドが表示され、Managerターミナルが動作しています。](../assets/images/ithyno-agents-2.png){ loading=lazy }
+  <figcaption>Managerの起動コマンドを確認するときは、Manager欄を展開します。</figcaption>
+</figure>
+
 ## 4. ダッシュボードからDispatchする
 
 1. **+ New Change**でChangeを作るか、既存のproposed Changeを開きます。
@@ -98,17 +146,19 @@ Managerは最初に`code` Workerを選択します。codeが成功すると`revi
 
 ## 5. ManagerターミナルからDispatchする
 
-Managerターミナルへ同じコマンドを直接入力することもできます。
+Managerターミナルへ同じコマンドを直接入力することもできます。Changeカードの
+コピーボタンを使用するとChange IDをコピーできます。コピーしたIDを、以下の
+dispatchコマンドの後ろへ貼り付けてください。
 
 === "Claude / Agy / スラッシュコマンド対応クライアント"
 
-    ```text
+    ```shell
     /ithy-opsx:dispatch add-health-endpoint
     ```
 
 === "Codex"
 
-    ```text
+    ```shell
     ithy-opsx-dispatch add-health-endpoint
     ```
 
@@ -117,13 +167,13 @@ dispatch-multiを使用します。
 
 === "Claude / Agy / スラッシュコマンド対応クライアント"
 
-    ```text
+    ```shell
     /ithy-opsx:dispatch-multi change-one change-two change-three
     ```
 
 === "Codex"
 
-    ```text
+    ```shell
     ithy-opsx-dispatch-multi change-one change-two change-three
     ```
 
@@ -142,6 +192,6 @@ dispatch-multiは待機する前に複数Changeを起動しますが、各Change
 | 2つ目のChangeが起動しない | `maxParallel`、Agents画面、非parallel実行が保持するproject lockを確認します。 |
 
 ステージの流れは[Multi-agent execution flow](multi-agent-execution-flow.md)、CLI固有の
-追加設定は[Multi-agent CLI](user-manual/multi-agent-cli.md)を参照してください。
+追加設定は[エージェント設定（`agents.yaml`）](user-manual/multi-agent-cli.md)を参照してください。
 Managerターミナルの維持とlive-shell Workerのメッセージについては、別ページの
 [Advanced：tmuxとagmsg](advanced/tmux-and-agmsg.md)にまとめています。

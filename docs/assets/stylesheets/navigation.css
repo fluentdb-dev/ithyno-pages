@@ -1,0 +1,36 @@
+.ithyno-sidebar-toggle {
+  display: none;
+}
+
+@media screen and (min-width: 76.25em) {
+  .ithyno-sidebar-toggle {
+    position: fixed;
+    top: 7rem;
+    left: 0;
+    z-index: 4;
+    display: grid;
+    width: 1.65rem;
+    height: 3rem;
+    padding: 0;
+    place-items: center;
+    border: 0.05rem solid var(--md-default-fg-color--lightest);
+    border-left: 0;
+    border-radius: 0 0.35rem 0.35rem 0;
+    color: var(--md-default-fg-color--light);
+    background: var(--md-default-bg-color);
+    box-shadow: var(--md-shadow-z1);
+    font: inherit;
+    font-size: 1.25rem;
+    cursor: pointer;
+  }
+
+  .ithyno-sidebar-toggle:hover,
+  .ithyno-sidebar-toggle:focus-visible {
+    color: var(--md-accent-fg-color);
+    background: var(--md-accent-fg-color--transparent);
+  }
+
+  html[data-ithyno-sidebar="collapsed"] .md-sidebar--primary {
+    display: none;
+  }
+}

@@ -1,0 +1,26 @@
+.md-content {
+  --ithyno-article-image-max-width: 85%;
+}
+
+.md-content figure img,
+.md-content__inner > p > img {
+  display: block;
+  width: auto;
+  max-width: var(--ithyno-article-image-max-width);
+  height: auto;
+  margin-inline: auto;
+}
+
+.md-content figure.dialog-screenshot img {
+  max-width: 60%;
+}
+
+@media screen and (max-width: 44.984375em) {
+  .md-content {
+    --ithyno-article-image-max-width: 100%;
+  }
+
+  .md-content figure.dialog-screenshot img {
+    max-width: 100%;
+  }
+}

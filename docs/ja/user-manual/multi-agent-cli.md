@@ -186,4 +186,5 @@ dispatcher が role に応じて自動選択します。
 
 ## 関連ページ
 
-- エージェントのロール — code / review / verify / manager の使い分け (未整備。ドキュメント予定。)
+- [複数エージェントを設定してDispatchする](../multi-agent-setup-and-dispatch.md) — ManagerとWorkerの役割、および標準的な設定手順。
+- [OpenSpecとエージェント](../architecture/openspec-agent.md) — Code、Review、Verifyの実行と状態遷移。

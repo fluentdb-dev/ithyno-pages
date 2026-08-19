@@ -44,6 +44,11 @@ standard roles:
 Set a custom prompt only when you want to override the CLI-aware built-in
 workflow.
 
+<figure class="dialog-screenshot" markdown="span">
+  ![The Manager agent editor configured to run Agy with the built-in dispatch prompt.](assets/images/agent-manager.png){ loading=lazy }
+  <figcaption>Manager example: leave the Prompt blank to use the CLI-specific built-in dispatch workflow.</figcaption>
+</figure>
+
 ### Example: a different CLI for every worker stage
 
 This example uses Claude as the Manager, Codex for implementation, Copilot for
@@ -63,13 +68,53 @@ Codex is launched with `codex exec <prompt>`, while Claude and Copilot receive
 `-p <prompt>`. You do not need to put `exec`, `-p`, or a workflow name in this
 example.
 
-!!! warning "Review automatic-approval flags"
-    The flags above allow unattended file and command execution. Use them only
-    in a repository and account you trust. Replace them with the approval or
-    sandbox settings appropriate for your environment.
+The agent name is only a label. The value in **Command** determines which CLI
+is actually launched.
+
+<figure class="dialog-screenshot" markdown="span">
+  ![A Worker editor with the code role selected and the built-in OpenSpec apply prompt.](assets/images/agent-code.png){ loading=lazy }
+  <figcaption>Code Worker example: select the code role and leave its Prompt blank to use the built-in OpenSpec apply workflow.</figcaption>
+</figure>
+
+<figure class="dialog-screenshot" markdown="span">
+  ![A Worker editor with the review role selected and a custom ithyno review prompt.](assets/images/agent-review.png){ loading=lazy }
+  <figcaption>Review Worker example with a custom per-role Prompt override.</figcaption>
+</figure>
+
+!!! warning "Review automatic-approval flags for cross-CLI workers"
+    The example above includes `--dangerously-bypass-approvals-and-sandbox`,
+    `--yolo -s`, and `--dangerously-skip-permissions`. These flags allow the
+    Worker to edit files and run commands without waiting for confirmation.
+
+    They are relevant when the Manager starts a different CLI as an independent
+    subprocess and that CLI would otherwise wait for approval. They are not
+    required merely to delegate from a Manager to a same-CLI child through its
+    native Agent/Tool mechanism. For subprocess Workers, enable unattended
+    execution only in a repository and account you trust, and replace the
+    example flags with the approval or sandbox settings appropriate for your
+    environment.
 
 You can also select several role chips, such as `review` and `verify`, for one
 worker.
+
+<figure markdown="span">
+  ![The Agents page shows an Agy Manager, a Codex code worker, and a Copilot review worker.](assets/images/ithyno-agents.png){ loading=lazy }
+  <figcaption>An example Agents page with the Manager and role-based Workers configured.</figcaption>
+</figure>
+
+### Verified Manager and Worker combinations
+
+The following combinations have been manually confirmed with ithyno's
+dispatcher. This table is also retained in the
+[ithyno README](https://github.com/fluentdb-dev/ithyno#agent-dispatch-compatibility).
+
+| Manager | Claude Worker | Agy Worker | Copilot Worker | Codex Worker | `dispatch-multi` |
+|---|---:|---:|---:|---:|---:|
+| Claude | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Codex | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Agy | ✅ | ✅ | ✅ | ✅ | ✅ |
+
+✅ means confirmed; ❌ means currently not working.
 
 ## 3. Check the configuration
 
@@ -86,6 +131,11 @@ After saving:
 `maxParallel` limits concurrently active changes. It does not run code, review,
 and verify simultaneously for the same change.
 
+<figure markdown="span">
+  ![The expanded Manager entry shows its resolved launch command while the Manager terminal is running.](assets/images/ithyno-agents-2.png){ loading=lazy }
+  <figcaption>Expand the Manager entry when you need to inspect its resolved launch command.</figcaption>
+</figure>
+
 ## 4. Dispatch from the dashboard
 
 1. Create a change with **+ New Change**, or open an existing proposed change.
@@ -100,17 +150,19 @@ the code stage. Questions that require a decision appear as **Needs human**.
 
 ## 5. Dispatch from the Manager terminal
 
-You can send the same command directly in the Manager terminal.
+You can send the same command directly in the Manager terminal. Use the copy
+button on a change card to copy its change ID, then paste the ID after the
+dispatch command shown below.
 
 === "Claude / Agy / slash-command clients"
 
-    ```text
+    ```shell
     /ithy-opsx:dispatch add-health-endpoint
     ```
 
 === "Codex"
 
-    ```text
+    ```shell
     ithy-opsx-dispatch add-health-endpoint
     ```
 
@@ -119,13 +171,13 @@ change proposals exist:
 
 === "Claude / Agy / slash-command clients"
 
-    ```text
+    ```shell
     /ithy-opsx:dispatch-multi change-one change-two change-three
     ```
 
 === "Codex"
 
-    ```text
+    ```shell
     ithy-opsx-dispatch-multi change-one change-two change-three
     ```
 
@@ -144,7 +196,7 @@ still follows `code → review → verify` in order.
 | A second change does not start | Check `maxParallel`, the Agents page, and any project lock held by a non-parallel run. |
 
 See [Multi-agent execution flow](multi-agent-execution-flow.md) for the stage
-lifecycle and [Multi-agent CLI](user-manual/multi-agent-cli.md) for additional
-CLI-specific configuration. Persistent Manager terminals and live-shell worker
-messaging are covered separately in
+lifecycle and [Agent configuration (`agents.yaml`)](user-manual/multi-agent-cli.md)
+for additional CLI-specific configuration. Persistent Manager terminals and
+live-shell worker messaging are covered separately in
 [Advanced: tmux and agmsg](advanced/tmux-and-agmsg.md).

@@ -89,9 +89,10 @@ provide agent-to-agent messages.
 1. Open **Settings → Prerequisites** and confirm that tmux is detected.
 2. Open **Settings → Execution**.
 3. Enable **Wrap Manager terminal in tmux**.
-4. Restart or reopen the Manager terminal so it starts inside tmux.
+4. Select the refresh button in the upper-right corner of the Manager terminal
+   to restart it inside tmux.
 
-This writes the top-level setting:
+This writes the following setting to `agents.yaml` at the project root:
 
 ```yaml
 tmux: true
@@ -102,10 +103,11 @@ the current dashboard endpoint and session credentials into the session when
 it creates or reattaches it, so a recovered Manager uses the current project
 context.
 
-To stop using tmux, disable the toggle and restart the Manager terminal. If
-tmux is enabled but cannot be found on `PATH`, ithyno displays a warning and
-does not start the Manager. Install tmux or disable the setting, restart ithyno,
-and then reopen the Manager terminal.
+To stop using tmux, disable the toggle and restart the Manager from the refresh
+button in the upper-right corner of its terminal. If tmux is enabled but cannot
+be found on `PATH`, ithyno displays a warning and does not start the Manager.
+Install tmux or disable the setting, restart ithyno, and then reopen the Manager
+terminal.
 
 ## Use agmsg for persistent workers and messaging
 

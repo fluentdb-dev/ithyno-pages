@@ -82,11 +82,29 @@ git --version
 node --version
 ```
 
-### Permissions
+### Run the installer when SmartScreen appears
 
-!!! note "Installation guide scaffold"
-    Document the tested Windows Security, SmartScreen, terminal, and automation
-    permission steps here. Do not disable system-wide security controls.
+Microsoft Defender SmartScreen may stop an installer that is not yet widely
+recognized. Do not disable SmartScreen. First confirm that you downloaded the
+installer from the [official ithyno Releases page](https://github.com/fluentdb-dev/ithyno/releases),
+then use the one-time confirmation flow:
+
+1. Select **More info** on the SmartScreen message.
+
+<figure markdown="span">
+  ![Microsoft Defender SmartScreen initially shows only the Don't run action and a More info link.](assets/images/win-install-1.png){ loading=lazy }
+  <figcaption>Select <strong>More info</strong> to display the application details and additional action.</figcaption>
+</figure>
+
+2. Confirm that the application filename is the ithyno installer you downloaded,
+   then select **Run anyway**. The exact labels follow the Windows display
+   language; the screenshots show Japanese Windows.
+
+<figure markdown="span">
+  ![After opening More info, SmartScreen shows the ithyno installer filename and the Run anyway action.](assets/images/win-install-2.png){ loading=lazy }
+  <figcaption>Select <strong>Run anyway</strong> only after confirming the installer source and filename.</figcaption>
+</figure>
+
   </div>
 
   <div data-install-panel data-os="linux" markdown>
@@ -202,9 +220,6 @@ chmod +x ithyno-*-linux-x86_64.AppImage
 2. [Download the latest VSIX](https://github.com/fluentdb-dev/ithyno/releases){ data-release-asset=".vsix" }.
 3. In VS Code, run **Extensions: Install from VSIX…** and select the file.
 
-!!! note "Installation guide scaffold"
-    Add Marketplace installation and first-launch verification here when they
-    are available.
   </div>
 </div>
 
