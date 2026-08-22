@@ -93,6 +93,9 @@ plugins:
             Getting Started: はじめに
             Installation: インストール
             Start Simple Project: シンプルなプロジェクトを始める
+            Claude role example: Claudeロール別設定例
+            Codex role example: Codex設定例
+            Antigravity role example: Antigravity CLI設定例
             Set up multiple agents: 複数エージェントを設定する
             Multi-agent execution flow: マルチエージェント実行フロー
             Init & Import: 初期化とインポート
@@ -123,6 +126,9 @@ nav:
   - Getting Started:
       - Installation: installation.md
       - Start Simple Project: project-creation-flow.md
+      - Claude role example: claude-role-model-example.md
+      - Codex role example: codex-role-example.md
+      - Antigravity role example: antigravity-role-example.md
       - Set up multiple agents: multi-agent-setup-and-dispatch.md
       - Multi-agent execution flow: multi-agent-execution-flow.md
       - Init & Import: user-manual-init-and-import.md

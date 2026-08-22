@@ -77,6 +77,33 @@ Electron / Browser の場合は現時点で config フックが無いため、
 `No conversation found to continue` で失敗するため、上記 session-id 自動管理
 を推奨します。
 
+## ElectronまたはBrowserで埋め込みManagerターミナルが表示されない
+
+Electronと直接Browser modeはサーバーのネイティブPTY backendを使用します。
+PTYを利用できない場合でも、ダッシュボード自体は起動を継続します。
+`/api/health`を確認し、`terminal.available: false`と表示される場合、埋め込み
+Managerターミナルは非表示になりますが、その他の機能は利用できます。
+
+多くの場合、現在のOS、アーキテクチャ、またはNode.js versionに対応する
+`@homebridge/node-pty-prebuilt-multiarch`を読み込めていません。対応するNode.js
+versionを使用し、アプリケーションまたは依存関係を再インストールしてください。
+
+VS Code Extensionは埋め込みPTYではなくVS Code native Terminalを使用するため、
+`terminal.available: false`でもVS Codeのターミナルは利用できます。
+
+## Windowsのターミナルで行った変更がダッシュボードへ反映されない
+
+ithynoサーバー（またはVS Code extension host）とAgent CLIを同じ環境で
+実行してください。
+
+- 両方をWindows nativeで実行する、または
+- 両方をWSL内で実行する。
+
+片方をWindows、もう片方をWSLで実行しないでください。この境界をまたぐ
+ファイル監視は不安定なため、Agentによる編集をダッシュボードが検出できない
+場合があります。Windows nativeのターミナルには、ConPTYを利用できる
+Windows 10 version 1809以降が必要です。
+
 ## VS Code 拡張の Dashboard 起動時に "did not observe launch URL within 20000ms" が出る
 
 ithyno サーバー (`bin/ithyno.js` → `tsx server/index.ts`) のコールドスタートが

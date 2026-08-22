@@ -63,6 +63,33 @@ For the Electron and Browser versions, since configuration hooks are not yet ava
 
 Setting `claude --continue` in `ithyno.terminalStartup` (VS Code extension settings) will override the startup command. However, running `--continue` in a fresh project will fail with `No conversation found to continue`, so the automatic session-id management above is recommended.
 
+## The Embedded Manager Terminal Is Not Available in Electron or Browser Mode
+
+Electron and direct browser mode use the server's native PTY backend. The
+dashboard can continue to run when that backend is unavailable. Check
+`/api/health`: if it reports `terminal.available: false`, the embedded Manager
+terminal is hidden, but the remaining dashboard views continue to work.
+
+This usually means that `@homebridge/node-pty-prebuilt-multiarch` could not load
+for the current operating system, architecture, or Node.js version. Use a
+supported Node.js version and reinstall the application or its dependencies.
+
+The VS Code Extension uses a native VS Code Terminal instead of this embedded
+PTY, so `terminal.available: false` does not disable the VS Code terminal.
+
+## Changes Made in the Windows Terminal Do Not Reach the Dashboard
+
+Run the ithyno server (or VS Code extension host) and the agent CLI in the same
+environment:
+
+- both in native Windows; or
+- both inside WSL.
+
+Do not run one side in Windows and the other in WSL. File watching across that
+boundary is unreliable, so the dashboard may not detect the agent's edits.
+Native Windows terminal support requires Windows 10 version 1809 or later for
+ConPTY.
+
 ## VS Code Extension: "did not observe launch URL within 20000ms" Error at Dashboard Startup
 
 The cold start of the ithyno server (`bin/ithyno.js` -> `tsx server/index.ts`) has exceeded the timeout limit. Check the server-side logs in `View → Output → ithyno`. Common causes include:
