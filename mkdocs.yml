@@ -96,13 +96,16 @@ plugins:
             Claude role example: Claudeロール別設定例
             Codex role example: Codex設定例
             Antigravity role example: Antigravity CLI設定例
+            Check available models: 利用可能なモデルを確認する
             Set up multiple agents: 複数エージェントを設定する
             Multi-agent execution flow: マルチエージェント実行フロー
             Init & Import: 初期化とインポート
+            Secrets: Secrets
             Agent configuration (agents.yaml): エージェント設定（agents.yaml）
             Troubleshooting: トラブルシューティング
             Advanced: 高度な設定
             tmux and agmsg: tmuxとagmsg
+            CLI waiting notifications: CLI待機通知
             Architecture: アーキテクチャ
             Overview: 概要
             OpenSpec and agents: OpenSpecとエージェント
@@ -129,13 +132,16 @@ nav:
       - Claude role example: claude-role-model-example.md
       - Codex role example: codex-role-example.md
       - Antigravity role example: antigravity-role-example.md
+      - Check available models: model-availability.md
       - Set up multiple agents: multi-agent-setup-and-dispatch.md
       - Multi-agent execution flow: multi-agent-execution-flow.md
       - Init & Import: user-manual-init-and-import.md
+      - Secrets: secrets.md
       - Agent configuration (agents.yaml): user-manual/multi-agent-cli.md
       - Troubleshooting: user-manual/troubleshooting.md
   - Advanced:
       - tmux and agmsg: advanced/tmux-and-agmsg.md
+      - CLI waiting notifications: advanced/cli-notification-hooks.md
   - Architecture:
       - Overview: architecture.md
       - OpenSpec and agents: architecture/openspec-agent.md

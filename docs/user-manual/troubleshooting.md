@@ -77,6 +77,42 @@ supported Node.js version and reinstall the application or its dependencies.
 The VS Code Extension uses a native VS Code Terminal instead of this embedded
 PTY, so `terminal.available: false` does not disable the VS Code terminal.
 
+## Codex Rejects `curl` Requests to the ithyno API or npm Commands
+
+The Codex Manager sandbox can block connections to the localhost URL in
+`ITHYNO_BASE` or writes to npm's cache and log directories. This does not
+necessarily mean that the ithyno server has stopped.
+
+Add the following settings to the Codex user configuration at
+`~/.codex/config.toml`:
+
+```toml
+sandbox_mode = "workspace-write"
+approval_policy = "on-request"
+
+[sandbox_workspace_write]
+network_access = true
+writable_roots = [
+  "/Users/<username>/.npm"
+]
+```
+
+`network_access = true` allows Codex commands to reach the local ithyno API and
+required external services. `writable_roots` adds only npm's cache and log
+directory to the writable locations. Replace `<username>` with your macOS user
+name.
+
+After saving the file, restart Codex with the refresh button in the dashboard's
+Manager terminal. The change does not apply to an already-running Codex
+session.
+
+Normal ithyno development does not require `danger-full-access`. Start with the
+scoped configuration above and approve individual operations only when they
+need to cross the remaining sandbox boundary. See the
+[Codex sandbox documentation](https://learn.chatgpt.com/docs/sandboxing) and
+[configuration reference](https://learn.chatgpt.com/docs/config-file/config-reference)
+for details.
+
 ## Changes Made in the Windows Terminal Do Not Reach the Dashboard
 
 Run the ithyno server (or VS Code extension host) and the agent CLI in the same

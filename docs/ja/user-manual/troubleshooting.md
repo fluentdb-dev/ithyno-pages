@@ -91,6 +91,37 @@ versionを使用し、アプリケーションまたは依存関係を再イン�
 VS Code Extensionは埋め込みPTYではなくVS Code native Terminalを使用するため、
 `terminal.available: false`でもVS Codeのターミナルは利用できます。
 
+## Codexからithyno APIへの`curl`やnpmコマンドが拒否される
+
+Codex Managerのサンドボックス設定によって、`ITHYNO_BASE`が示すlocalhostへの
+通信や、npmのcache・logへの書き込みが拒否されることがあります。この場合、
+ithynoサーバーが停止しているとは限りません。
+
+Codexのユーザー設定`~/.codex/config.toml`へ、次の設定を追加してください。
+
+```toml
+sandbox_mode = "workspace-write"
+approval_policy = "on-request"
+
+[sandbox_workspace_write]
+network_access = true
+writable_roots = [
+  "/Users/<username>/.npm"
+]
+```
+
+`network_access = true`は、Codexからlocalhostのithyno APIや必要な外部サービスへの
+通信を許可します。`writable_roots`はnpmのcacheとlogだけを追加の書き込み対象に
+します。`<username>`は利用中のmacOSユーザー名へ置き換えてください。
+
+設定後、ダッシュボードのManagerターミナルにあるリフレッシュボタンからCodexを
+再起動してください。既に開いているCodexセッションには設定が反映されません。
+
+通常のithyno開発で`danger-full-access`を有効にする必要はありません。まず上記の
+限定的な設定を使用し、それでもサンドボックス外の操作が必要な場合だけ個別に
+承認してください。詳細は[CodexのSandboxドキュメント](https://learn.chatgpt.com/docs/sandboxing)と
+[Configuration Reference](https://learn.chatgpt.com/docs/config-file/config-reference)を参照してください。
+
 ## Windowsのターミナルで行った変更がダッシュボードへ反映されない
 
 ithynoサーバー（またはVS Code extension host）とAgent CLIを同じ環境で

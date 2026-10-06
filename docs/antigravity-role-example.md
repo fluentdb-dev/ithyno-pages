@@ -19,6 +19,9 @@ AGY Manager
     below are a current example. Use `agy models` when you need to replace them
     with models available in your installed version.
 
+The complete command and current snapshot are documented in
+[Check models available to each agent CLI](model-availability.md).
+
 ## Configure the Agents screen
 
 Open **Agents** and configure the following three entries. Leave **Prompt**

@@ -18,6 +18,9 @@ Codex Manager
     model names below are a current example; replace them when your installed
     Codex version provides newer or different models.
 
+Use [Check models available to each agent CLI](model-availability.md) to open
+the account-specific picker before copying a model name into Args.
+
 ## Configure the Agents screen
 
 Open **Agents** and configure the following three entries. Leave **Prompt**

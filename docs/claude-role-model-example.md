@@ -14,6 +14,10 @@ Claude Manager
     **Settings → Prerequisites**, confirm that Claude is available, and use
     **Manage skills** to install its OpenSpec and ithyno skills.
 
+Before choosing the Args values, see
+[Check models available to each agent CLI](model-availability.md) and confirm
+the choices shown by your signed-in Claude Code session.
+
 ## Configure the Agents screen
 
 Open **Agents** and configure the following three entries. Leave **Prompt**

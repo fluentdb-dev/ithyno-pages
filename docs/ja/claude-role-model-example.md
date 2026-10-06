@@ -14,6 +14,10 @@ Claude Manager
     **Settings → Prerequisites**でClaudeが利用可能なことを確認し、
     **Manage skills**からOpenSpecとithynoのSkillをインストールしてください。
 
+Argsへモデル名を設定する前に、
+[各Agent CLIで利用可能なモデルを確認する](model-availability.md)を参照し、
+ログイン済みClaude Codeに表示される選択肢を確認してください。
+
 ## Agents画面で設定する
 
 **Agents**を開き、次の3つを設定します。**Prompt**は空欄にします。
